@@ -1,12 +1,12 @@
 process.env.NODE_ENV = 'test';
-var expect = require("chai").expect;
-var hue = require("node-hue-api");
+
+var expect   = require("chai").expect;
+var jsonFile = require("jsonfile");
+var hue      = require("node-hue-api");
+var HueApi   = require("node-hue-api").HueApi;
+var request  = require("request");
+
 var meeting_room_file = "./config/rooms/Skydyne.json";
-var jsonFile = require ("jsonfile");
-var HueApi = require("node-hue-api").HueApi;
-
-var request = require('request');
-
 
 var api = null;
 var meeting_room = null;
