@@ -12,6 +12,9 @@
     "gulp-mocha": "^3.0.1",
     "gulp-util": "^3.0.7",
     "jsonfile": "^2.4.0",
+    "lodash": "^4.17.2",
+    "meshblu-config": "^6.3.0",
+    "meshblu-http": "^9.1.0",
     "node-hue-api": "^2.3.0",
     "request": "^2.79.0"
   },
