@@ -6,10 +6,10 @@ var hue      = require("node-hue-api");
 var HueApi   = require("node-hue-api").HueApi;
 var request  = require("request");
 
-var meeting_room_file = "./config/rooms/Skydyne.json";
 
 var api = null;
 var meeting_room = null;
+var meeting_room_file = "./config/rooms/Skydyne.json";
 var username = "newdeveloper";
 var meshblu_trigger = "https://triggers.octoblu.com/v2/flows/"
 var meshblu_hue_integration_flow = "f0e859b8-17e2-4dee-87fe-e71f733cc1d0"
@@ -36,30 +36,18 @@ describe("Ad hoc meeting test:", function(){``
   */
 
   it("When you start an Ad hoc meeting by pressing Hue tap swicth", function(done){
-    var requestData = {"roomId": "64bf33c0-e1e8-443c-8e0b-f79cb0b81284"}
     console.log("I am in set meeting")
-    request({
-      url: "https://triggers.octoblu.com/v2/flows/f0e859b8-17e2-4dee-87fe-e71f733cc1d0/triggers/9c516ba1-c251-11e6-8ac8-5588f11c4255",
-      method: "POST",
-      json: true,
-      headers: {
-        "content-type": "application/json",
-    },
-    body: JSON.stringify(requestData)
-  },function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-            console.log(body)
-        }
-        else {
-
-            console.log("error: " + error)
-            console.log("response.statusCode: " + response.statusCode)
-            console.log("response.statusText: " + response.statusText)
-        }
-        done()
+    request.post("https://triggers.octoblu.com/v2/flows/f0e859b8-17e2-4dee-87fe-e71f733cc1d0/triggers/9c516ba1-c251-11e6-8ac8-5588f11c4255", {
+      json: {"roomId": "64bf33c0-e1e8-443c-8e0b-f79cb0b81284"},
+    }, function (error, response, body) {
+      if (error) return done(error);
+      if (response.statusCode !== 201) return done(new Error('Unexpected status code: ' + response.statusCode))
+      console.log("error: " + error)
+      console.log("response.statusCode: " + response.statusCode)
+      console.log("response.statusText: " + response.statusText)
+      done()
+    })
   })
-
-   })
 
   it("Then the color of the light should change to red", function(done){
     api.lightStatus(meeting_room.light_id, function(error, result) {
