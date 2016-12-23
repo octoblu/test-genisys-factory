@@ -16,7 +16,9 @@
     "meshblu-config": "^6.3.0",
     "meshblu-http": "^9.1.0",
     "node-hue-api": "^2.3.0",
-    "request": "^2.79.0"
+    "path": "^0.12.7",
+    "request": "^2.79.0",
+    "uri": "^0.1.0"
   },
   "devDependencies": {
     "mocha": "^3.2.0"

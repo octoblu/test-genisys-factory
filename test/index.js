@@ -6,14 +6,12 @@ var request  = require("request");
 var MeshbluHttp = require ('meshblu-http');
 var MeshbluConfig = require ('meshblu-config');
 var _ = require('lodash');
+var path = require ('path');
 
 var api = null;
 var meeting_room = null;
-var meeting_room_file = "./config/rooms/Skydyne.json";
+var meeting_room_file = "./config/room.json";
 var username = "newdeveloper";
-var meshblu_trigger = "https://triggers.octoblu.com/v2/flows/"
-var meshblu_hue_integration_flow = "f0e859b8-17e2-4dee-87fe-e71f733cc1d0"
-var meshblu_hue_trigger = "9c516ba1-c251-11e6-8ac8-5588f11c4255"
 var hue_in_meeting_state = 0;   //21844 is green(available), 0 is red(in meeting)
 var meshblu = null;
 var response = null;
@@ -35,7 +33,7 @@ describe("Ad hoc meeting test:", function(){
   });
 
   before('trigger to book a meeting', function(done){
-    request.post("https://triggers.octoblu.com/v2/flows/f0e859b8-17e2-4dee-87fe-e71f733cc1d0/triggers/9c516ba1-c251-11e6-8ac8-5588f11c4255",
+    request.post(meeting_room.url,
     {
       json: {"roomId": roomId}
     },
