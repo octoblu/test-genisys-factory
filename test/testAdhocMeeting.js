@@ -1,15 +1,15 @@
 var Room = require("../lib/room.js")
-var room = new Room("../config/room.json");
+var room = new Room("../config/meshblu_skydyne_room.json");
 var expect        = require('chai').expect;
 var assert = require('assert');
 
 
 describe('Ad hoc meeting test:', function(){
   this.timeout(20000)
-  /*before('Set the status of the room to be avaialble',function(done) {
+  before('Set the status of the room to be avaialble',function(done) {
     room.isBooked(function(error, result){
       if(error){
-        console.log("isBooked Error : " + error);
+        done("there was an error booking the room" + error.message)
       }
       else {
         console.log("isBooked result : " + result);
@@ -32,8 +32,8 @@ describe('Ad hoc meeting test:', function(){
     })
     done()
 
-  })*/
-  it('At the start of the test suit Light Status should be avaialble', function(done){
+  })
+  xit('At the start of the test suit Light Status should be avaialble', function(done){
     console.log('checking for room light')
     room.isLightInMeeting(function(error, result){
       console.log({error,result})
@@ -51,6 +51,6 @@ describe('Ad hoc meeting test:', function(){
     })
 
   }
-  )
+)
 
 })
