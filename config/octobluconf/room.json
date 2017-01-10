@@ -1,7 +1,8 @@
 {
   "name": "octobluconf",
   "bridgeIp": "10.181.4.23",
-  "lightId": "11",
+  "lightId": "7797ebec-aea8-471c-a6ea-fed4966f19e8",
   "roomId" : "c3e09783-4262-4eaf-8011-631d4a8a30ba",
+  "skypeId": "7ff8c505-2b82-40ab-bb9e-ea0d341cd931",
   "url": "https://triggers.octoblu.com/v2/flows/17317d6a-fe22-465f-8326-29e084b75c08/triggers/6744c500-d3aa-11e6-9f1d-2f20b1503d42"
 }
