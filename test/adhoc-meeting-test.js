@@ -12,14 +12,12 @@ var Room          = require('../lib/room.js')
 
 var room = new Room({ room: roomOptions, meshbluConfig: meshbluConfig, btnCredFile: btnCredFile });
 
-var state = {}
 
-
-
-describe('Create Ad hoc meeting test:', function()  {
-    this.timeout(20000)
+describe('Ad hoc meeting test:', function()  {
+  this.timeout(35000)
+  describe('Start Ad-hoc meeting test:', function(){
     let roomState = {}
-    before('Create Room test ', function(done) {
+    before('Start an Ad-hoc meeting', function(done) {
       room.createAdHocMeeting(function(error) {
         if(error){
           console.log("Error createAdHocMeeting : " + error.message);
@@ -28,12 +26,12 @@ describe('Create Ad hoc meeting test:', function()  {
         setTimeout(function(){
           room.getRoomState(function(result){
             roomState = result
-            console.log('the state :', roomState)
             done()
           })
         }, 15000);
       })
     })
+
 //
     it('verify that currentMeeting exists', function() {
       expect(roomState.currentMeeting).to.exist
@@ -58,5 +56,27 @@ describe('Create Ad hoc meeting test:', function()  {
       })
     })
 
+  })
 
+
+  describe('Test Skype within Ad hoc meeting:', function(){
+    var skypeState = {}
+    before('Start Skype', function(done){
+      room.startSkype(function(error){
+        if (error) return done (error)
+      })
+      setTimeout(function(){
+        room.getSkypeState(function(result){
+          skypeState = result
+          done()
+        })
+      }, 10000);
+    })
+    it('verify audio is enabled', function(){
+      expect(skypeState.audio).to.be.true
+    })
+    it('verify video is enabled', function(){
+      expect(skypeState.audio).to.be.true
+    })
+  })
 })
