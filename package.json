@@ -20,6 +20,8 @@
     "meshblu-config": "^6.3.0",
     "meshblu-firehose-socket.io": "^2.0.10",
     "meshblu-http": "^9.1.0",
+    "mocha-multi": "^0.10.0",
+    "mocha-osx-reporter": "^0.1.2",
     "moment": "^2.17.1",
     "node-hue-api": "^2.3.0",
     "path": "^0.12.7",
@@ -31,7 +33,8 @@
     "mocha": "^3.2.0"
   },
   "scripts": {
-    "test": "NODE_ENV=test mocha"
+    "test": "NODE_ENV=test mocha",
+    "test:watch": "npm run test -- --watch --reporter mocha-multi --reporter-options spec=-,mocha-osx-reporter=-"
   },
   "repository": {
     "type": "git",
