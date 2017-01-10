@@ -17,16 +17,21 @@ var state = {}
 
 
 describe('Create Ad hoc meeting test:', function()  {
+    this.timeout(15000)
     before('Create Room test ', function(done) {
-      room.getRoomState(function(result){
-        state = result
-        console.log('the state :', state)
-        done()
-      })
+      done()
     })
-    it('verify that currentMeeting exists', function() {
 
 
+
+    it('verify that currentMeeting exists', function(done) {
+      setTimeout(function(){
+        room.getRoomState(function(result){
+          state = result
+          console.log('the state :', state)
+          done()
+        })
+      }, 7000);
     })
 
 })
