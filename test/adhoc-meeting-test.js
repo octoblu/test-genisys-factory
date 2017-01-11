@@ -12,8 +12,8 @@ var Room          = require('../lib/room.js')
 
 var room = new Room({ room: roomOptions, meshbluConfig: meshbluConfig, btnCredFile: btnCredFile });
 
-const testTimeout    = 25 * 1000;
-const messageTimeout = 15 * 1000;
+const testTimeout    = 30 * 1000;
+const messageTimeout = 20 * 1000;
 
 
 describe('Instant meeting test suite:', function() {
@@ -29,15 +29,10 @@ describe('Instant meeting test suite:', function() {
     let roomState = {}
 
     before('Starting an Instant meeting', function(done) {
-      room.triggerButtonPress(function(error) {
+      room.triggerButtonPress(messageTimeout, function(error) {
+        console.log('button press')
         if(error) done(error)
-
-        setTimeout(function() {
-          room.getRoomState(function(error, result) {
-            roomState = result
-            done(error)
-          })
-        }, 15000)
+        else done()
       })
     })
 
@@ -63,6 +58,24 @@ describe('Instant meeting test suite:', function() {
         done()
       })
     })
+
+
+  describe('Test End instant meeting', function() {
+    before('Trigger End Meeting', function(done) {
+      room.triggerButtonPress(messageTimeout,function(error) {
+        if(error) done(error)
+
+        console.log('Ending meeting')
+        done()
+      })
+    })
+
+      it('fake test', function() {
+        expect(true).to.be.true
+      })
+
+    })
+
   })
 
 
@@ -87,6 +100,5 @@ describe('Instant meeting test suite:', function() {
   //     expect(skypeState.audio).to.be.true
   //   })
   // })
-
 
 })
