@@ -16,17 +16,32 @@ var room = new Room({ room: roomOptions, meshbluConfig: meshbluConfig, btnCredFi
 describe('Ad hoc meeting test:', function() {
   this.timeout(35000)
 
+  describe('Reset the room:', function() {
+
+    before('test', function(done){
+      room.resetRoom(function(error, result){
+        var output = result
+        done(error)
+      })
+    })
+
+    it('Reset test', function() {
+      expect(true).to.be.true
+    })
+
+  })
+
   describe('Start Ad-hoc meeting test:', function() {
     let roomState = {}
 
     before('Start an Ad-hoc meeting', function(done) {
-      room.createAdHocMeeting(function(error) {
+      room.triggerButtonPress(function(error) {
         if(error) done(error)
 
         setTimeout(function() {
-          room.getRoomState(function(result) {
+          room.getRoomState(function(error, result) {
             roomState = result
-            done()
+            done(error)
           })
         }, 15000)
       })
