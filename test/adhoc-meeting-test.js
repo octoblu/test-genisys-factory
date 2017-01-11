@@ -12,36 +12,23 @@ var Room          = require('../lib/room.js')
 
 var room = new Room({ room: roomOptions, meshbluConfig: meshbluConfig, btnCredFile: btnCredFile });
 
-const buttonTimeout = 15000;
+const testTimeout    = 25 * 1000;
+const messageTimeout = 15 * 1000;
 
 
-describe('Ad hoc meeting test:', function() {
-  this.timeout(35000)
+describe('Instant meeting test suite:', function() {
+  this.timeout(testTimeout)
 
-    before('Make sure the room is avaialble', function(done){
-      room.getRoomState(function(error, roomState){
-        if(error) return done(error)
-        console.log('Room State in BEFORE ', roomState.currentMeeting);
-        if(roomState.currentMeeting != undefined){
-          console.log('room is BOOKED')
-          room.triggerButtonPress(function(error){
-            console.log('trigger button')
-            if (error) return done(error)
-            setTimeout(function(){
-              console.log('Time Out Over');
-              done()
-            }, 15000)
-          })
-        }
-        else done()
-      })
-
+  before('Reset room', function(done){
+    room.resetRoom(messageTimeout, function(error, result){
+      done(error)
     })
+  })
 
-  describe('Start Ad-hoc meeting test:', function() {
+  describe('Instant meeting test without Skype', function() {
     let roomState = {}
 
-    before('Start an Ad-hoc meeting', function(done) {
+    before('Starting an Instant meeting', function(done) {
       room.triggerButtonPress(function(error) {
         if(error) done(error)
 
@@ -54,19 +41,19 @@ describe('Ad hoc meeting test:', function() {
       })
     })
 
-    it('verify that currentMeeting exists', function() {
+    it('should have currentMeeting', function() {
       expect(roomState.currentMeeting).to.exist
     })
 
-    it('verify that meetingUrl exists', function() {
+    it('should have valid meetingUrl', function() {
       expect(roomState.meetingUrl).to.exist
     })
 
-    it('verify that inSkype property is set to false', function() {
+    it('should not be in a Skype session', function() {
       expect(roomState.inSkype).to.be.false
     })
 
-    it('verify that the color of Hue light is Red', function(done) {
+    it('should have a red light', function(done) {
       room.getLightColor(function(error, color) {
         if(error) {
           console.log('Error' + error.message);
@@ -79,7 +66,7 @@ describe('Ad hoc meeting test:', function() {
   })
 
 
-  // describe('Test Skype within Ad hoc meeting:', function(){
+  // describe('Test Skype within Instant meeting:', function(){
   //   var skypeState = {}
   //
   //   before('Start Skype', function(done) {
