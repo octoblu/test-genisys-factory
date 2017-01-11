@@ -12,24 +12,31 @@ var Room          = require('../lib/room.js')
 
 var room = new Room({ room: roomOptions, meshbluConfig: meshbluConfig, btnCredFile: btnCredFile });
 
+const buttonTimeout = 15000;
+
 
 describe('Ad hoc meeting test:', function() {
   this.timeout(35000)
 
-  describe('Reset the room:', function() {
-
-    before('test', function(done){
-      room.resetRoom(function(error, result){
-        var output = result
-        done(error)
+    before('Make sure the room is avaialble', function(done){
+      room.getRoomState(function(error, roomState){
+        if(error) return done(error)
+        console.log('Room State in BEFORE ', roomState.currentMeeting);
+        if(roomState.currentMeeting != undefined){
+          console.log('room is BOOKED')
+          room.triggerButtonPress(function(error){
+            console.log('trigger button')
+            if (error) return done(error)
+            setTimeout(function(){
+              console.log('Time Out Over');
+              done()
+            }, 15000)
+          })
+        }
+        else done()
       })
-    })
 
-    it('Reset test', function() {
-      expect(true).to.be.true
     })
-
-  })
 
   describe('Start Ad-hoc meeting test:', function() {
     let roomState = {}
@@ -72,25 +79,27 @@ describe('Ad hoc meeting test:', function() {
   })
 
 
-  describe('Test Skype within Ad hoc meeting:', function(){
-    var skypeState = {}
+  // describe('Test Skype within Ad hoc meeting:', function(){
+  //   var skypeState = {}
+  //
+  //   before('Start Skype', function(done) {
+  //     room.startSkype(function(error) {
+  //       if (error) return done (error)
+  //     })
+  //     setTimeout(function(){
+  //       room.getSkypeState(function(result) {
+  //         skypeState = result
+  //         done()
+  //       })
+  //     }, 10000);
+  //   })
+  //   it('verify audio is enabled', function() {
+  //     expect(skypeState.audio).to.be.true
+  //   })
+  //   it('verify video is enabled', function() {
+  //     expect(skypeState.audio).to.be.true
+  //   })
+  // })
 
-    before('Start Skype', function(done) {
-      room.startSkype(function(error) {
-        if (error) return done (error)
-      })
-      setTimeout(function(){
-        room.getSkypeState(function(result) {
-          skypeState = result
-          done()
-        })
-      }, 10000);
-    })
-    it('verify audio is enabled', function() {
-      expect(skypeState.audio).to.be.true
-    })
-    it('verify video is enabled', function() {
-      expect(skypeState.audio).to.be.true
-    })
-  })
+
 })
