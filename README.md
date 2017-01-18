@@ -8,4 +8,5 @@ Process to create new inquisitor device for a room
 - Download meshblu-inquisitor project from github. Put meshblu.json credential from the user into the main directory of the project.
 - Run command line 'coffe command.coffee -u (uuid of the inqusitor device here)'
 - Go to interaction-monitor.octoblu.com/(uuid of the new inquisitor device here)/graph to check that the inquisitor created properly
-- We can also add or remove device from the inquisitor device group from "things.octoblu.com" with update device function
+- We can also add or remove device from the inquisitor device group from "things.octoblu.com" 
+- Always update device's subscription using meshblu-inquisitor everytime you add or remove a additional device
