@@ -24,47 +24,34 @@ var currentRoomState = {}
 
 describe('Instant Meeting', function() {
   this.timeout(70000)
-
-  before('Test is run reset the room:', function(done){
-
-    room.resetRoom(function(error, result){
-      if (error) done(error)
-      console.log('Room RESET Complete with result state of room : ', result)
-      done()
-    })
-
-  })
-
-
-  describe('Instant meeting without Skype:', function() {
   var roomState = {};
   var light = null;
 
-    before('Start an Instant meeting:', function(done) {
-
-      room.triggerButtonPress(function(error) {
-        if(error) done(error)
-        room.waitForMeeting('Booked', _.once(function(error, result){
-          if (error) done (error)
-          room.getRoomState(function(error, state){
-            if (error) done(error);
-            roomState = state
-
-            done()
-          })
-        }))
-      })
-
-
-
+  before('Test is run reset the room:', function(done){
+    room.resetRoom(function(error, result){
+      if (error) done(error)
+      done()
     })
+  })
 
+  before('Start an Instant meeting:', function(done) {
+    room.triggerButtonPress(function(error) {
+      if(error) done(error)
+      room.waitForMeeting('Booked', _.once(function(error, result){
+        if (error) done (error)
+        room.getRoomState(function(error, state){
+          if (error) done(error);
+          roomState = state
+          done()
+        })
+      }))
+    })
+  })
 
-
+  describe('Instant meeting with Skype:', function() {
     describe('Verify Instant Meeting is created successfully', function(){
 
       it('Should that currentMeeting exists', function() {
-        console.log('currentMeeting', roomState.currentMeeting);
         expect(roomState.currentMeeting).to.exist
       })
 
@@ -100,30 +87,60 @@ describe('Instant Meeting', function() {
 
     })
 
+
+
+
+    describe('Test Skype:', function(){
+      var expectedAVState = {audio : true, video : true}
+      var actualAVState = {}
+
+      before('Start Skype', function(done) {
+        room.startSkype(function(error) {
+          if (error) return done (error)
+          done()
+        })
+      })
+
+      before('Test Skype Audio Video', function(done){
+        room.waitforSkypeAV('inSkype', function(error, AVState){
+          if(error != null) done(error)
+            actualAVState = AVState
+            done()
+          })
+      })
+
+
+      it('verify audio is enabled', function() {
+        expect(actualAVState.audio).to.be.true
+      })
+
+      it('verify video is enabled', function() {
+        expect(actualAVState.video).to.be.true
+      })
+
+      after('End Skype', function(done){
+        room.endSkype(function(error){
+          if (error) console.log('Error ending skype : ', error);
+          done()
+        })
+      })
+
+      after('End Meeting', function(done){
+        room.triggerButtonPress(function(error) {
+          if(error) done(error)
+          room.waitForMeeting('Available', _.once(function(error, result){
+            if (error) done (error)
+            room.getRoomState(function(error, state){
+              if (error) done(error);
+              roomState = state
+              done()
+            })
+          }))
+        })
+
+      })
+
+    })
+
   })
-
-
-  // describe('Test Skype within Ad hoc meeting:', function(){
-  //   var skypeState = {}
-  //
-  //   before('Start Skype', function(done) {
-  //     room.startSkype(function(error) {
-  //       if (error) return done (error)
-  //     })
-  //     setTimeout(function(){
-  //       room.getSkypeState(function(result) {
-  //         skypeState = result
-  //         done()
-  //       })
-  //     }, 10000);
-  //   })
-  //   it('verify audio is enabled', function() {
-  //     expect(skypeState.audio).to.be.true
-  //   })
-  //   it('verify video is enabled', function() {
-  //     expect(skypeState.audio).to.be.true
-  //   })
-  // })
-
-
 })
