@@ -22,10 +22,11 @@ const buttonTimeout = 55000;
 var currentRoomState = {}
 
 
-describe('Instant Meeting', function() {
+describe('Instant meeting with Skype:', function() {
   this.timeout(70000)
   var roomState = {};
   var light = null;
+  var actualColor = null;
 
   before('Test is run reset the room:', function(done){
     room.resetRoom(function(error, result){
@@ -48,113 +49,129 @@ describe('Instant Meeting', function() {
     })
   })
 
-  describe('Instant meeting with Skype:', function() {
-    describe('Verify Instant Meeting is created successfully', function(){
+  before('Get the light status', function(done) {
+    room.waitForLight('Red', _.once(function(error, color) {
+      actualColor = color
+      if (error) done(error)
+      done()
+    }))
+  })
 
-      it('Should that currentMeeting exists', function() {
-        expect(roomState.currentMeeting).to.exist
-      })
+  describe('Verify Instant Meeting is created successfully', function(){
 
-      it('Should that meetingUrl exists', function() {
-         expect(roomState.meetingUrl).to.exist
-      })
-
-      it('Should that inSkype property is set to false', function() {
-        expect(roomState.inSkype).to.be.false
-      })
-
-      it('Should that the subject is set to Instant Meeting', function() {
-        expect(roomState.subject).to.equal('Instant Meeting')
-      })
-
+    it('Should verify that currentMeeting in room exists', function() {
+      expect(roomState.currentMeeting).to.exist
     })
 
-    describe('Verify that the light color is changed to red', function () {
-      var actualColor = null;
-
-      before('Get the light status', function(done) {
-        room.waitForLight('Red', _.once(function(error, color) {
-          actualColor = color
-          if (error) done(error)
-          done()
-
-        }))
-      })
-
-      it('Should change to red', function(){
-        expect(actualColor).to.equal('Red')
-      })
-
+    it('Should verify that meetingUrl in room exists', function() {
+       expect(roomState.meetingUrl).to.exist
     })
 
+    it('Should verify that inSkype property of room is set to false', function() {
+      expect(roomState.inSkype).to.be.false
+    })
+
+    it('Should verify that the meeting subject is set to Instant Meeting', function() {
+      expect(roomState.subject).to.equal('Instant Meeting')
+    })
+
+    it('Should verify that light color changes to red', function(){
+      expect(actualColor).to.equal('Red')
+    })
+
+  })
 
 
 
-    describe('Verify Skype is turning on properly:', function(){
-      var expectedAVState = {audio : true, video : true}
-      var actualAVState = {}
-      var skyeRoomState = null
+  describe('Verify Skype functionality:', function(){
+    var expectedAVState = {audio : true, video : true}
+    var actualAVState = {}
+    var skypeRoomState = null
 
+    describe('Verify that Skype starts successfully', function(){
       before('Start Skype', function(done) {
         room.startSkype(function(error) {
           if (error) return done (error)
 
           room.waitForRoomInSkype('inSkype', function(error, state){
             if (error) done(error);
-            skyeRoomState = state
+            skypeRoomState = state
             done()
           })
 
         })
       })
 
-      before('Test Skype Audio Video', function(done){
-        room.waitforSkypeAV('inSkype', function(error, AVState){
-          if(error != null) done(error)
+      before('Test Skype Audio/Video', function(done){
+        room.waitforSkypeAV('inSkype', function(AVState){
             actualAVState = AVState
             done()
-          })
+        })
+      })
+
+      it('Should verify that inSkype property of room is set to true', function() {
+        expect(skypeRoomState).to.be.true
       })
 
 
-
-      it('Should that inSkype property is set to true', function() {
-        expect(skyeRoomState).to.be.true
-      })
-
-
-      it('verify audio is enabled', function() {
+      it('Should verify that audio is enabled', function() {
         expect(actualAVState.audio).to.be.true
       })
 
-      it('verify video is enabled', function() {
+      it('Should verify that video is enabled', function() {
         expect(actualAVState.video).to.be.true
       })
 
 
-      after('End Skype', function(done){
-        room.endSkype(function(error){
-          if (error) console.log('Error ending skype : ', error);
-          done()
-        })
-      })
-
-      after('End Meeting', function(done){
-        room.triggerButtonPress(function(error) {
-          if(error) done(error)
-          room.waitForMeeting('Available', _.once(function(error, result){
-            if (error) done (error)
-            room.getRoomState(function(error, state){
-              if (error) done(error);
-              roomState = state
-              done()
-            })
-          }))
-        })
-
-      })
-
     })
 
+
+    describe('Verify that Skype is Ending successfully', function(){
+      before('End Skype Session', function(done){
+        room.endSkype(function(error){
+          if (error) console.log('Error ending skype : ', error);
+
+          room.waitForRoomInSkype('outSkype', function(error, state){
+            if (error) done(error);
+            skypeRoomState = state
+            done()
+          })
+        })
+      })
+
+      it('Should verify inSkype is false', function() {
+        expect(skypeRoomState).to.be.false
+      })
+    })
+
+  })
+
+  describe('Verify that Meeting is Ending successfully', function(){
+
+    before('End Meeting', function(done){
+      room.triggerButtonPress(function(error) {
+        if(error) done(error)
+        room.waitForMeeting('Available', _.once(function(error, result){
+          if (error) done (error)
+          room.getRoomState(function(error, state){
+            if (error) done(error);
+            roomState = state
+            done()
+          })
+        }))
+      })
+    })
+
+    it('Should verify that currentMeeting in room does not exists', function() {
+      expect(roomState.currentMeeting).to.not.exist
+    })
+
+    it('Should verify that meetingUrl in room does not exists', function() {
+       expect(roomState.meetingUrl).to.not.exist
+    })
+
+    it('Should that inSkype property of room is set to false', function() {
+      expect(roomState.inSkype).to.be.false
+    })
   })
 })
