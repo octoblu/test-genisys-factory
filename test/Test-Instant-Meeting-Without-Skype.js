@@ -1,4 +1,6 @@
 'use strict'
+
+var roomDir = process.env.ROOMDIR;
 var path   = require('path')
 var expect = require('chai').expect;
 var assert = require('assert');

@@ -1,8 +1,5 @@
 {
   "name": "Skydyne",
-  "bridgeIp": "10.181.4.23",
-  "lightId": "11",
   "roomId" : "64bf33c0-e1e8-443c-8e0b-f79cb0b81284",
-  "skypeId" : "c8a6b4b6-9763-4f41-a9bd-b32dac3ae038",
-  "url": "https://triggers.octoblu.com/v2/flows/17317d6a-fe22-465f-8326-29e084b75c08/triggers/6744c500-d3aa-11e6-9f1d-2f20b1503d42"
+  "skypeId" : "c8a6b4b6-9763-4f41-a9bd-b32dac3ae038"
 }
