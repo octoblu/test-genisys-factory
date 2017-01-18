@@ -90,14 +90,21 @@ describe('Instant Meeting', function() {
 
 
 
-    describe('Test Skype:', function(){
+    describe('Verify Skype is turning on properly:', function(){
       var expectedAVState = {audio : true, video : true}
       var actualAVState = {}
+      var skyeRoomState = null
 
       before('Start Skype', function(done) {
         room.startSkype(function(error) {
           if (error) return done (error)
-          done()
+
+          room.waitForRoomInSkype('inSkype', function(error, state){
+            if (error) done(error);
+            skyeRoomState = state
+            done()
+          })
+
         })
       })
 
@@ -110,6 +117,12 @@ describe('Instant Meeting', function() {
       })
 
 
+
+      it('Should that inSkype property is set to true', function() {
+        expect(skyeRoomState).to.be.true
+      })
+
+
       it('verify audio is enabled', function() {
         expect(actualAVState.audio).to.be.true
       })
@@ -117,6 +130,7 @@ describe('Instant Meeting', function() {
       it('verify video is enabled', function() {
         expect(actualAVState.video).to.be.true
       })
+
 
       after('End Skype', function(done){
         room.endSkype(function(error){
