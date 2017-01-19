@@ -5,7 +5,7 @@ var path   = require('path')
 var expect = require('chai').expect;
 var assert = require('assert');
 
-var inquisitorFile = require ('../config/inquisitor.json')
+var inquisitorFile = require ('../config/Skydyne/inquisitor.json')
 var btnCredFile    = require('../config/Skydyne/button.json')
 var roomOptions    = require('../config/Skydyne/room.json')
 var meshbluConfig  = require('../config/meshblu-citrix.json')
