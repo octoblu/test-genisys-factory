@@ -22,8 +22,15 @@ function runTestForConfig(entry, callback) {
   var resolved = require.resolve(path.join(__dirname, '../test/Test-Instant-Meeting-Without-Skype.js'));
   delete require.cache[resolved];
 
+  // var resolved = require.resolve(path.join(__dirname, '../test/envtest.js'));
+  // delete require.cache[resolved];
+  //mocha.addFile('../test/envtest.js')
+
+
   mocha.addFile('../test/Test-Instant-Meeting.js')
   mocha.addFile('../test/Test-Instant-Meeting-Without-Skype.js')
+
+
 
 
   var testStartTime = null
@@ -81,7 +88,7 @@ glob("../config/*", function (error, files) {
     return fs.lstatSync(file).isDirectory()
   })
 
-  async.eachSeries(files, runTestForConfig, function(error, results){
+  async.eachSeries(files, async.reflect(runTestForConfig), function(error, results){
     console.log('done with all tests!')
   })
 

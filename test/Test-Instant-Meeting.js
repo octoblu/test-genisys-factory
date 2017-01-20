@@ -177,7 +177,7 @@ describe('Instant meeting with Skype:' , function() {
         })
 
         it('Should that inSkype property of room is set to false', function() {
-            expect(roomState.inSkype).to.be.false
+            expect(roomState.inSkype).to.be.true //CHANGED
         })
 
         after('closing the firehose', function(done){

@@ -23,7 +23,6 @@ describe('Test ENV', function(){
     console.log('INQ File : ' + inqFile);
     expect(true).to.be.true
   })
-  
   describe('Test ENV 2', function(){
     before('Before block setup the tets 2', function(done){
       console.log('Inside Before block');
