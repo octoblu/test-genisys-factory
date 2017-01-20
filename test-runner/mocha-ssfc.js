@@ -16,13 +16,13 @@ function runTestForConfig(entry, callback) {
   process.env.ROOM = entry
   var mocha = new Mocha({})
 
-  // var resolved = require.resolve(path.join(__dirname, '../test/Test-Instant-Meeting.js'));
-  // delete require.cache[resolved];
+  var resolved = require.resolve(path.join(__dirname, '../test/Test-Instant-Meeting.js'));
+  delete require.cache[resolved];
 
   var resolved = require.resolve(path.join(__dirname, '../test/Test-Instant-Meeting-Without-Skype.js'));
   delete require.cache[resolved];
 
-  //mocha.addFile('../test/Test-Instant-Meeting.js')
+  mocha.addFile('../test/Test-Instant-Meeting.js')
   mocha.addFile('../test/Test-Instant-Meeting-Without-Skype.js')
 
 
@@ -70,7 +70,6 @@ function runTestForConfig(entry, callback) {
       console.log('*** ' + test.title + ' failed with error : ' + error.stack)
     })
 
-
 }
 
 glob("../config/*", function (error, files) {
@@ -85,6 +84,8 @@ glob("../config/*", function (error, files) {
   async.eachSeries(files, runTestForConfig, function(error, results){
     console.log('done with all tests!')
   })
+
+
 
 
 })
