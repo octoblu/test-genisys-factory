@@ -112,9 +112,8 @@ describe('Instant meeting without Skype:', function() {
     })
 
 
-    after('closing the firehose', function(done){
+    after(function(done){
       room.closeFirehose(function(error){
-        console.log('Closed Fire Hose Connection....');
         if (error) done(error)
         done()
       })

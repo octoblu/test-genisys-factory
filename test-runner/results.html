@@ -1,0 +1,172 @@
+<section class="suite">
+  <h1>Instant meeting with Skype:</h1>
+  <dl>
+    <section class="suite">
+      <h1>Verify Instant Meeting is created successfully</h1>
+      <dl>
+        <dt>Should verify that currentMeeting in room exists</dt>
+        <dd><pre><code>expect(roomState.currentMeeting).to.exist</code></pre></dd>
+        <dt>Should verify that meetingUrl in room exists</dt>
+        <dd><pre><code>expect(roomState.meetingUrl).to.exist</code></pre></dd>
+        <dt>Should verify that inSkype property of room is set to false</dt>
+        <dd><pre><code>expect(roomState.inSkype).to.be.false</code></pre></dd>
+        <dt>Should verify that the meeting subject is set to Instant Meeting</dt>
+        <dd><pre><code>expect(roomState.subject).to.equal('Instant Meeting')</code></pre></dd>
+        <dt>Should verify that light color changes to red</dt>
+        <dd><pre><code>expect(actualColor).to.equal('Red')</code></pre></dd>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>Verify Skype functionality:</h1>
+      <dl>
+        <section class="suite">
+          <h1>Verify that Skype starts successfully</h1>
+          <dl>
+            <dt>Should verify that inSkype property of room is set to true</dt>
+            <dd><pre><code>expect(skypeRoomState).to.be.true</code></pre></dd>
+            <dt>Should verify that audio is enabled</dt>
+            <dd><pre><code>expect(actualAVState.audio).to.be.true</code></pre></dd>
+            <dt>Should verify that video is enabled</dt>
+            <dd><pre><code>expect(actualAVState.video).to.be.true</code></pre></dd>
+          </dl>
+        </section>
+        <section class="suite">
+          <h1>Verify that Skype is Ending successfully</h1>
+          <dl>
+            <dt>Should verify inSkype is false</dt>
+            <dd><pre><code>expect(skypeRoomState).to.be.false</code></pre></dd>
+          </dl>
+        </section>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>Verify that Meeting is Ending successfully</h1>
+      <dl>
+        <dt>Should verify that currentMeeting in room does not exists</dt>
+        <dd><pre><code>expect(roomState.currentMeeting).to.not.exist</code></pre></dd>
+        <dt>Should verify that meetingUrl in room does not exists</dt>
+        <dd><pre><code>expect(roomState.meetingUrl).to.not.exist</code></pre></dd>
+        <dt>Should that inSkype property of room is set to false</dt>
+        <dd><pre><code>expect(roomState.inSkype).to.be.false</code></pre></dd>
+      </dl>
+    </section>
+  </dl>
+</section>
+<section class="suite">
+  <h1>Instant meeting without Skype:</h1>
+  <dl>
+    <section class="suite">
+      <h1>Verify Instant Meeting is created successfully</h1>
+      <dl>
+        <dt>Should verify that currentMeeting in room exists</dt>
+        <dd><pre><code>expect(roomState.currentMeeting).to.exist</code></pre></dd>
+        <dt>Should verify that meetingUrl in room exists</dt>
+        <dd><pre><code>expect(roomState.meetingUrl).to.exist</code></pre></dd>
+        <dt>Should verify that inSkype property of room is set to false</dt>
+        <dd><pre><code>expect(roomState.inSkype).to.be.false</code></pre></dd>
+        <dt>Should verify that the meeting subject is set to Instant Meeting</dt>
+        <dd><pre><code>expect(roomState.subject).to.equal('Instant Meeting')</code></pre></dd>
+        <dt>Should verify that light color changes to red</dt>
+        <dd><pre><code>expect(actualColor).to.equal('Red')</code></pre></dd>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>Verify that Meeting is Ending successfully</h1>
+      <dl>
+        <dt>Should verify that currentMeeting in room does not exists</dt>
+        <dd><pre><code>expect(roomState.currentMeeting).to.not.exist</code></pre></dd>
+        <dt>Should verify that meetingUrl in room does not exists</dt>
+        <dd><pre><code>expect(roomState.meetingUrl).to.not.exist</code></pre></dd>
+        <dt>Should that inSkype property of room is set to false</dt>
+        <dd><pre><code>expect(roomState.inSkype).to.be.false</code></pre></dd>
+      </dl>
+    </section>
+  </dl>
+</section>
+<section class="suite">
+  <h1>Instant meeting with Skype:</h1>
+  <dl>
+    <section class="suite">
+      <h1>Verify Instant Meeting is created successfully</h1>
+      <dl>
+        <dt>Should verify that currentMeeting in room exists</dt>
+        <dd><pre><code>expect(roomState.currentMeeting).to.exist</code></pre></dd>
+        <dt>Should verify that meetingUrl in room exists</dt>
+        <dd><pre><code>expect(roomState.meetingUrl).to.exist</code></pre></dd>
+        <dt>Should verify that inSkype property of room is set to false</dt>
+        <dd><pre><code>expect(roomState.inSkype).to.be.false</code></pre></dd>
+        <dt>Should verify that the meeting subject is set to Instant Meeting</dt>
+        <dd><pre><code>expect(roomState.subject).to.equal('Instant Meeting')</code></pre></dd>
+        <dt>Should verify that light color changes to red</dt>
+        <dd><pre><code>expect(actualColor).to.equal('Red')</code></pre></dd>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>Verify Skype functionality:</h1>
+      <dl>
+        <section class="suite">
+          <h1>Verify that Skype starts successfully</h1>
+          <dl>
+            <dt>Should verify that inSkype property of room is set to true</dt>
+            <dd><pre><code>expect(skypeRoomState).to.be.true</code></pre></dd>
+            <dt>Should verify that audio is enabled</dt>
+            <dd><pre><code>expect(actualAVState.audio).to.be.true</code></pre></dd>
+            <dt>Should verify that video is enabled</dt>
+            <dd><pre><code>expect(actualAVState.video).to.be.true</code></pre></dd>
+          </dl>
+        </section>
+        <section class="suite">
+          <h1>Verify that Skype is Ending successfully</h1>
+          <dl>
+            <dt>Should verify inSkype is false</dt>
+            <dd><pre><code>expect(skypeRoomState).to.be.false</code></pre></dd>
+          </dl>
+        </section>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>Verify that Meeting is Ending successfully</h1>
+      <dl>
+        <dt>Should verify that currentMeeting in room does not exists</dt>
+        <dd><pre><code>expect(roomState.currentMeeting).to.not.exist</code></pre></dd>
+        <dt>Should verify that meetingUrl in room does not exists</dt>
+        <dd><pre><code>expect(roomState.meetingUrl).to.not.exist</code></pre></dd>
+        <dt>Should that inSkype property of room is set to false</dt>
+        <dd><pre><code>expect(roomState.inSkype).to.be.false</code></pre></dd>
+      </dl>
+    </section>
+  </dl>
+</section>
+<section class="suite">
+  <h1>Instant meeting without Skype:</h1>
+  <dl>
+    <section class="suite">
+      <h1>Verify Instant Meeting is created successfully</h1>
+      <dl>
+        <dt>Should verify that currentMeeting in room exists</dt>
+        <dd><pre><code>expect(roomState.currentMeeting).to.exist</code></pre></dd>
+        <dt>Should verify that meetingUrl in room exists</dt>
+        <dd><pre><code>expect(roomState.meetingUrl).to.exist</code></pre></dd>
+        <dt>Should verify that inSkype property of room is set to false</dt>
+        <dd><pre><code>expect(roomState.inSkype).to.be.false</code></pre></dd>
+        <dt>Should verify that the meeting subject is set to Instant Meeting</dt>
+        <dd><pre><code>expect(roomState.subject).to.equal('Instant Meeting')</code></pre></dd>
+        <dt>Should verify that light color changes to red</dt>
+        <dd><pre><code>expect(actualColor).to.equal('Red')</code></pre></dd>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>Verify that Meeting is Ending successfully</h1>
+      <dl>
+        <dt class="error">Should verify that currentMeeting in room does not exists</dt>
+        <dd class="error"><pre><code>expect(roomState.currentMeeting).to.not.exist</code></pre></dd>
+        <dd class="error">AssertionError: expected { Object (roomId, roomName, ...) } to not exist</dd>
+        <dt class="error">Should verify that meetingUrl in room does not exists</dt>
+        <dd class="error"><pre><code>expect(roomState.meetingUrl).to.not.exist</code></pre></dd>
+        <dd class="error">AssertionError: expected 'https://m.octo.space/foj' to not exist</dd>
+        <dt>Should that inSkype property of room is set to false</dt>
+        <dd><pre><code>expect(roomState.inSkype).to.be.false</code></pre></dd>
+      </dl>
+    </section>
+  </dl>
+</section>

@@ -24,7 +24,7 @@ describe('Instant meeting with Skype:' , function() {
     var light = null;
     var actualColor = null;
 
-    before('Test is run reset the room:', function(done) {
+    before('Reset the room:', function(done) {
         room.resetRoom(function(error, result) {
             if (error)
                 done(error)
@@ -177,12 +177,11 @@ describe('Instant meeting with Skype:' , function() {
         })
 
         it('Should that inSkype property of room is set to false', function() {
-            expect(roomState.inSkype).to.be.true //CHANGED
+            expect(roomState.inSkype).to.be.false
         })
 
         after('closing the firehose', function(done){
           room.closeFirehose(function(error){
-            console.log('Closed Fire Hose Connection....');
             if (error) done(error)
             done()
           })

@@ -1,45 +1,82 @@
-var expect = require('chai').expect
-var roomDir = process.env.ROOM;
+var expect = require('chai').expect;
 
-var inqFile = roomDir + "/inquisitor.json"
+var room = 'Skydyne'
 
-var inq = require(inqFile)
+describe('Instant meeting with Skype on :', function() {
 
-describe('Test ENV', function(){
-  before('Before block setup the tets', function(done){
-    console.log('Inside Before block');
-    setTimeout(done, 400)
-  })
-  before('Before block setup the tets hook', function(done){
-    console.log('Inside Before block');
-    setTimeout(done, 200)
-  })
-  it('Test-1', function(done){
-    console.log('INQ File : ' + inqFile);
-    setTimeout(done, 100)
+ before('Test is run reset the room:', function(done){
+    setTimeout(done, 100);
   })
 
-  it('Test-2', function(){
-    console.log('INQ File : ' + inqFile);
-    expect(true).to.be.true
-  })
-  describe('Test ENV 2', function(){
-    before('Before block setup the tets 2', function(done){
-      console.log('Inside Before block');
-      setTimeout(done, 400)
-    })
-    before('Before block setup the tets hook 2', function(done){
-      console.log('Inside Before block');
-      setTimeout(done, 200)
-    })
-    it('Test-3', function(done){
-      console.log('INQ File : ' + inqFile);
-      setTimeout(done, 100)
+ describe('Verify Instant Meeting is created successfully', function(){
+
+   it('Should verify that currentMeeting in room exists', function() {
+      expect(true).to.be.true
     })
 
-    it('Test-4', function(){
-      console.log('INQ File : ' + inqFile);
-      expect(true).to.be.false
+   it('Should verify that meetingUrl in room exists', function() {
+       expect(true).to.be.true
+    })
+
+ })
+
+
+
+ describe('Verify Skype functionality:', function(){
+
+   describe('Verify that Skype starts successfully', function(){
+      before('Start Skype', function() {
+      })
+
+     before('Test Skype Audio/Video', function(){
+
+     })
+
+     it('Should verify that inSkype property of room is set to true', function() {
+        expect(true).to.be.true
+      })
+
+
+     it('Should verify that audio is enabled', function() {
+        expect(true).to.be.true
+      })
+
+     it('Should verify that video is enabled', function() {
+        expect(true).to.be.true
+      })
+
+
+   })
+
+
+   describe('Verify that Skype is Ending successfully', function(){
+      before('End Skype Session', function(){
+
+     })
+
+     it('Should verify inSkype is false', function() {
+        expect(true).to.be.true
+      })
+    })
+
+ })
+
+ describe('Verify that Meeting is Ending successfully', function(){
+
+   before('End Meeting', function(){
+
+   })
+
+   it('Should verify that currentMeeting in room does not exists', function() {
+      expect(true).to.be.true
+    })
+
+   it('Should verify that meetingUrl in room does not exists', function() {
+       expect(true).to.be.true
+    })
+
+   it('Should that inSkype property of room is set to false', function() {
+      expect(true).to.be.true
     })
   })
 })
