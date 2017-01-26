@@ -13,9 +13,9 @@ Process to create new inquisitor device for a room
 
 
 
+
 To Run the Test
 - Make sure to have include meshblu.json of admin user inside room's config folder
-
 - run command from /test/ folder: 
     -- For complete instant meeting: env ROOM=../config/<name of config folder for the room>/ mocha Test-Instant-Meeting.js
     -- For instant meeting without skype: env ROOM=../config/<name of config folder for the room>/ mocha Test-Instant-Meeting-without-skype.js
