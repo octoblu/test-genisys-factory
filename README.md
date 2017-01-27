@@ -12,9 +12,26 @@ Process to create new inquisitor device for a room
 - Always update device's subscription using meshblu-inquisitor everytime you add or remove a additional device
 
 
+    
+##To Run all the tests specified in folder on all the rooms using test-runner:
+```
+‹test-schedule-meeting› »»»» node mocha-ssfc.js                                                                                                      0|19:38:22
 
+  Usage: mocha-ssfc [options]
 
-To Run the Test
+  Options:
+
+    -h, --help              output usage information
+    -V, --version           output the version number
+    -r, --rooms <roomsDir>  Directory containing room configuration files, escape with 'x'
+    -t, --tests <testDir>   Directory containing mocha tests, escape with 'x'
+```
+To debug the test runner:
+```
+env DEBUG=test-runner node mocha-ssfc.js -r ../config/ -t ../test >results.html
+```
+
+##To Run an individual test on a room directly using mocha:
 - Make sure to have include meshblu.json of admin user inside room's config folder
 - run command from /test/ folder: 
     -- For complete instant meeting: env ROOM=../config/<name of config folder for the room>/ mocha Test-Instant-Meeting.js
