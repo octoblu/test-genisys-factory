@@ -8,19 +8,19 @@ var meshbluConfig  = require('../meshblu.json')
 var Room           = require('../lib/room.js')
 var _              = require('lodash')
 
-var room = new Room({
-  room: roomOptions,
-  meshbluConfig: meshbluConfig,
-  inquisitorFile : inquisitorFile,
-  btnCredFile : btnCredFile
-});
-var message = {}
+// var room = new Room({
+//   room: roomOptions,
+//   meshbluConfig: meshbluConfig,
+//   inquisitorFile : inquisitorFile,
+//   btnCredFile : btnCredFile
+// });
+// var message = {}
 const buttonTimeout = 55000;
 
 var currentRoomState = {}
 
 
-describe('Instant meeting without Skype:', function() {
+xdescribe('Instant meeting without Skype:', function() {
   this.timeout(70000)
   var roomState = {};
   var light = null;

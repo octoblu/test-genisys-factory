@@ -25,9 +25,11 @@ describe('Instant meeting with Skype:' , function() {
 
   before('Reset the room:', function(done) {
     creds.generateMeshbluConfigs(function(error, meshbluConfigs) {
-      console.log(JSON.stringify({error, meshbluConfigs}, null, 2))
       room = new Room({meshbluConfigs: meshbluConfigs[0]})
-      room.connectAllFirehose(done)
+      room.connectAllFirehose((error) => {
+        console.log({error})
+        creds.revokeMeshbluConfigs(meshbluConfigs, done)
+      })
     })
   })
 
