@@ -1,14 +1,10 @@
 'use strict'
 
-var roomConfigDir = process.env.ROOM;
 var path          = require('path')
 var expect        = require('chai').expect;
 var assert        = require('assert');
 
-var inquisitorFile = require(roomConfigDir + '/inquisitor.json')
-var btnCredFile    = require(roomConfigDir + '/button.json')
-var roomOptions    = require(roomConfigDir + '/room.json')
-var meshbluConfig  = require(roomConfigDir + '/meshblu.json')
+var meshbluConfig  = require('../meshblu.json')
 var Room           = require('../lib/room.js')
 var _              = require('lodash')
 
