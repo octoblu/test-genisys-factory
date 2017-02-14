@@ -15,6 +15,8 @@ const buttonTimeout = 55000;
 
 var currentRoomState = {}
 
+var room = {}
+
 describe('Instant meeting with Skype:' , function() {
   this.timeout(70000)
   var roomState = {};
@@ -22,9 +24,10 @@ describe('Instant meeting with Skype:' , function() {
   var actualColor = null;
 
   before('Reset the room:', function(done) {
-    creds.generateMeshbluConfigs(function(error, result) {
-      console.log(JSON.stringify({error, result}, null, 2))
-      done()
+    creds.generateMeshbluConfigs(function(error, meshbluConfigs) {
+      console.log(JSON.stringify({error, meshbluConfigs}, null, 2))
+      room = new Room({meshbluConfigs: meshbluConfigs[0]})
+      room.connectAllFirehose(done)
     })
   })
 
@@ -185,7 +188,7 @@ describe('Instant meeting with Skype:' , function() {
     })
 
     after('closing the firehose', function(done){
-      room.closeFirehose(function(error){
+      room.closeAllFirehose(function(error){
         if (error) done(error)
         done()
       })
